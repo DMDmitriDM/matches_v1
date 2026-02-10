@@ -1,0 +1,22 @@
+/* ----------------- */
+/* --- media.css --- */
+/* ----------------- */
+
+/* 1 - 410 */
+
+@media (max-width: 410px) {
+  .box-game--set {
+    padding: 0 5px;
+  }
+
+  .box-game__title {
+    margin-bottom: 12px;
+    font-size: 30px;
+  }
+
+  .box-game__rules,
+  .box-game__matches,
+  .box-game__step-player {
+    padding: 10px 5px;
+  }
+}

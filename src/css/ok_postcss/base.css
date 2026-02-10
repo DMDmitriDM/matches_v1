@@ -1,0 +1,85 @@
+/* ============================================ */
+/* ============= variables ==================== */
+/* ============================================ */
+
+:root {
+  /* color */
+  --wite-zero: #FFF;
+  --black-zero: #000;
+  --orange-medium: #e7813d;
+  --orange-bold: #b65413;
+  --orange-brown: #7a390e;
+  --gray-light: rgb(247, 239, 239);
+  --gray-medium: rgb(131, 122, 122);
+  --gray-bold: rgb(58, 54, 54);
+  --green-light: #a8cfa3;
+  --red: rgb(245, 9, 9);
+}
+
+/* ============================================ */
+/* ================ global ==================== */
+/* ============================================ */
+
+html {
+	box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+.body-reset {
+  min-width: 320px;
+  font-family: arial, sans-serif;
+  background-color: rgb(136, 133, 133);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
+}
+
+/* ============================================ */
+/* ================ general =================== */
+/* ============================================ */
+
+/* = container = */
+
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* = all = */
+
+.img-max {
+  max-width: 100%;
+}
+
+.link-reset {
+  color: inherit;
+  text-decoration: none;
+}
+
+.list-reset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.btn-reset {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}

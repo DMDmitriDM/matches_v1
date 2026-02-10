@@ -1,0 +1,473 @@
+/* box-game.css */
+
+.box-game--set {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100svh;
+  background-color: rgb(233, 197, 152);
+}
+
+/* blind */
+
+.box-game__blind {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgb(168, 169, 187, 0.5);
+
+  transform-origin: center;
+  visibility: hidden;
+  transform: scale(0);
+  opacity: 0;
+  transition: visibility 0.2s ease-in-out, opacity 0.2s ease-in-out 0.1s, transform 0.2s ease-in-out;
+}
+
+.box-game__blind--active {
+  visibility: visible;
+  transform: scale(1);
+  opacity: 1;
+}
+
+.box-game__blind-wrap-span {
+  border-radius: 6px;
+  padding: 0 0 30px;
+}
+
+.box-game__blind-span {
+  display: inline-block;
+  font-size: 50px;
+  color: rgb(63, 29, 2);
+}
+
+@keyframes blind-keyframe {
+  to {
+    opacity: 0;
+  }
+}
+
+.box-game__blind--active .box-game__blind-span {
+  animation: blind-keyframe 1.2s linear infinite;
+}
+
+/* - */
+
+.box-game__title {
+  margin: 0;
+  margin-bottom: 15px;
+  user-select: none;
+}
+
+.box-game__rules,
+.box-game__matches,
+.box-game__step-player {
+  border: 2px solid rgb(131, 120, 120);
+  border-radius: 5px;
+  padding: 10px 10px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.box-game__rules {
+  margin-bottom: 15px;
+}
+
+.box-game__matches {
+  margin-bottom: 5px;
+}
+
+.box-game__step-player {
+  margin-bottom: 15px;
+}
+
+/* --- rules --- */
+
+.rules--set {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.rules__title {
+  margin: 0;
+  margin-bottom: 8px;
+  user-select: none;
+}
+
+.rules__wrap {
+  user-select: none;
+}
+
+.rules__wrap:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.rules__wrap--column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.rules__wrap--line {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* radio */
+
+.rules__wrap-radio--margin-bottom:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.rules__wrap-radio--margin-right:not(:last-child) {
+  margin-right: 10px;
+}
+
+.rules__wrap-radio {
+  position: relative;
+  user-select: none;
+  /* Убрать синее при нажатии */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Текст - label */
+.rules__label {
+  position: relative;
+  display: inline-block;
+  padding-left: 25px;
+  padding-top: 2px;
+  font-size: 16px;
+  color: var(--gray-bold);
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+/* Круг */
+.rules__label::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px solid var(--orange-medium);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Точка */
+.rules__label::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: var(--orange-medium);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* cheked */
+.rules__radio:checked + .rules__label::after {
+  opacity: 1;
+}
+
+.rules__radio:focus-visible + .rules__label::before {
+  box-shadow: 0 0 0 0.15rem rgba(71, 66, 57, 0.6);
+}
+
+/* hover */
+@media (hover: hover) {
+  .rules__radio:hover + .rules__label::before {
+    border-color: var(--orange-bold);
+    box-shadow: none;
+  }
+
+  .rules__radio:hover + .rules__label::after {
+    background-color: var(--orange-bold);
+  }
+
+  .rules__radio:hover + .rules__label {
+    color: var(--orange-bold);
+  }
+}
+
+@media (pointer: coarse) {
+  .rules__radio:hover + .rules__label::before {
+    border-color: var(--orange-medium);
+    box-shadow: none;
+  }
+
+  .rules__radio:hover + .rules__label::after {
+    background-color: var(--orange-medium);
+  }
+
+  .rules__radio:hover + .rules__label {
+    color: var(--gray-bold);
+  }
+}
+
+/* active */
+.rules__radio:active + .rules__label::before {
+  border-color: var(--orange-brown);
+}
+
+.rules__radio:active + .rules__label::after {
+  background-color: var(--orange-brown);
+}
+
+.rules__radio:active + .rules__label {
+  color: var(--orange-brown);
+}
+
+/* disabled */
+.rules__radio:disabled  + .rules__label::before {
+  border-color: var(--gray-medium);
+}
+
+.rules__radio:disabled + .rules__label::after {
+  background-color: var(--gray-medium);
+}
+
+.rules__radio:disabled + .rules__label {
+  color: var(--gray-medium);
+  cursor: default;
+}
+
+/* --- matches --- */
+
+.matches--set {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.matches__images-wrap {
+  margin-bottom: 8.5px;
+  border-radius: 6px;
+
+  padding: 2px 4px;
+
+  background-color: rgb(167, 167, 154);
+}
+
+.matches__images {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 6px;
+
+  min-height: 48px;
+  max-width: 280px;
+}
+
+.matches__images-match {
+  position: relative;
+  border-radius: 4px;
+  width: 8px;
+  height: 36px;
+  background-color: rgb(180, 129, 19);
+
+  visibility: visible;
+  transform-origin: center bottom;
+  transform: scale(1);
+  opacity: 1;
+  transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out 0.1s, transform 0.3s ease-in-out;
+}
+
+.matches__images-match--hidden {
+  /* display: none; */
+  visibility: hidden;
+  transform: scale(0);
+  opacity: 0;
+}
+
+.matches__images-match::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -1px;
+  width: 10px;
+  height: 12px;
+  border-radius: 5px 5px 3px 3px;
+  background-color: rgb(83, 42, 4);
+}
+
+.matches__number {
+  user-select: none;
+}
+
+.matches__number-span-title,
+.matches__number-span-count {
+  display: inline-block;
+  vertical-align: middle;
+  user-select: none;
+}
+
+.matches__number-span-title {
+  margin-right: 5px;
+}
+
+.matches__number-span-count {
+  font-size: 20px;
+  color: rgb(73, 3, 67);
+}
+
+.matches__take-span {
+  margin-bottom: 2px;
+  min-height: 19px;
+}
+
+.matches__number {
+  margin-bottom: 2px;
+}
+
+.matches__winner-span {
+  min-height: 19px;
+  color: rgb(223, 43, 43);
+}
+
+/* --- step-player --- */
+
+.step-player--set {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.step-player__title {
+  margin: 0;
+  margin-bottom: 8px;
+  user-select: none;
+}
+
+.step-player__wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* --- btn --- */
+
+.box-game__btn {
+  border: 2px solid rgb(95, 90, 90);
+  border-radius: 5px;
+  padding: 6px 10px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  color: var(--black-zero);
+  background-color: rgb(180, 175, 105);
+  transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  /* Убрать синее при нажатии */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.box-game__btn:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+/* focus */
+.box-game__btn:focus-visible {
+  outline: none;
+  border-color: rgb(180, 105, 105);
+}
+
+/* hover */
+@media (hover: hover) {
+  .box-game__btn:hover {
+    border-color: rgb(95, 90, 90);
+    background-color: rgb(180, 141, 105);
+  }
+}
+
+@media (pointer: coarse) {
+  .box-game__btn:hover {
+    border-color: rgb(95, 90, 90);
+    background-color: rgb(180, 175, 105);
+  }
+}
+
+/* active */
+.box-game__btn:active {
+  background-color: rgb(180, 105, 105);
+}
+
+/* disabled */
+.box-game__btn:disabled {
+  border-color: rgb(163, 156, 156);
+  background-color: rgb(216, 204, 197);
+  color: rgb(163, 156, 156);
+  cursor: default;
+}
+
+/* - */
+
+.step-player__btn {
+  border: 2px solid rgb(139, 128, 128);
+  border-radius: 5px;
+  padding: 6px 30px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  color: var(--black-zero);
+  background-color: rgb(233, 155, 83);
+  transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  /* Убрать синее при нажатии */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.step-player__btn:not(:last-child) {
+  margin-right: 30px;
+}
+
+/* focus */
+.step-player__btn:focus-visible {
+  outline: none;
+  border-color: rgb(216, 90, 90);
+}
+
+/* hover */
+@media (hover: hover) {
+  .step-player__btn:hover {
+    border-color: rgb(95, 90, 90);
+    background-color: rgb(216, 129, 48);
+  }
+}
+
+@media (pointer: coarse) {
+  .step-player__btn:hover {
+    border-color: rgb(95, 90, 90);
+    background-color: rgb(233, 155, 83);
+  }
+}
+
+/* active */
+.step-player__btn:active {
+  background-color: rgb(230, 85, 40);
+}
+
+/* disabled */
+.step-player__btn:disabled {
+  border-color: rgb(163, 156, 156);
+  background-color: rgb(216, 204, 197);
+  color: rgb(163, 156, 156);
+  cursor: default;
+}
